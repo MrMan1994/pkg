@@ -1,10 +1,10 @@
 package log
 
-import(
+import (
   "flag"
+  "github.com/pkg/errors"
   "log"
   "os"
-  "github.com/pkg/errors"
 )
 
 var (
@@ -16,42 +16,42 @@ func init() {
   flag.Parse()
 }
 
-func Print() {
-
+func Print(arg interface{}) {
+  stdOutLogger.Print(arg)
 }
 
-func Printf() {
-
+func Printf(args ...interface{}) {
+  stdOutLogger.Printf(args[0].(string), args[1:]...)
 }
 
-func Println() {
-
+func Println(arg interface{}) {
+  stdOutLogger.Println(arg)
 }
 
-func Fatal() {
-
+func Fatal(arg interface{}) {
+  stdErrLogger.Fatal(arg)
 }
 
-func Fatalf() {
-
+func Fatalf(args ...interface{}) {
+  stdErrLogger.Fatalf(args[0].(string), args[1:]...)
 }
 
-func Fatalln() {
-
+func Fatalln(args ...interface{}) {
+  stdErrLogger.Fatalln()
 }
 
-func Panic() {
-
+func Panic(arg interface{}) {
+  stdErrLogger.Panic(arg)
 }
 
-func Panicf() {
-
+func Panicf(args ...interface{}) {
+  stdErrLogger.Panicf(args[0].(string), args...)
 }
 
-func Panicln() {
-
+func Panicln(arg interface{}) {
+  stdErrLogger.Panicln(arg)
 }
 
-func Errorf() error {
-  return
+func Errorf(args ...interface{}) error {
+  return errors.Errorf(args[0].(string), args[1:]...)
 }
